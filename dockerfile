@@ -1,45 +1,20 @@
-# Use PHP 8.2 FPM as the base image
-FROM php:8.2-fpm
+FROM richarvey/nginx-php-fpm:3.1.6
 
-# Install system dependencies and PHP extensions
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    unzip \
-    zip \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    libzip-dev \
-    libpq-dev \
-    gnupg \
-    ca-certificates \
-    && docker-php-ext-install pdo pdo_mysql zip mbstring exif pcntl bcmath gd
-
-# Install Node.js for Vue.js/Vite
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt-get install -y nodejs
-
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Set the working directory in the container
-WORKDIR /var/www
-
-# Copy project files to the container
 COPY . .
 
-# Install PHP dependencies (Composer)
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+# Image config
+ENV SKIP_COMPOSER 1
+ENV WEBROOT /var/www/html/public
+ENV PHP_ERRORS_STDERR 1
+ENV RUN_SCRIPTS 1
+ENV REAL_IP_HEADER 1
 
-# Install frontend dependencies (npm for Vue.js + Vite)
-RUN npm install && npm run build
+# Laravel config
+ENV APP_ENV production
+ENV APP_DEBUG false
+ENV LOG_CHANNEL stderr
 
-# Set file permissions to avoid issues with storage/cache
-RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www/storage
+# Allow composer to run as root
+ENV COMPOSER_ALLOW_SUPERUSER 1
 
-# Expose the port the app will run on
-EXPOSE 8000
-
-# Start Laravel's PHP built-in server
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD ["/start.sh"]
