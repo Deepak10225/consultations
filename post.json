@@ -1,0 +1,201 @@
+{
+  "info": {
+    "_postman_id": "d7b85a49-6b58-45a4-b85b-22cba4fc66ed",
+    "name": "Consultation Management API",
+    "description": "API for managing consultations, user authentication, and profile management.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication Endpoints",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"John Doe\", \"email\": \"johndoe@example.com\", \"password\": \"password123\", \"password_confirmation\": \"password123\"}"
+            },
+            "url": {
+              "raw": "http://your-laravel-app/api/register",
+              "protocol": "http",
+              "host": ["your-laravel-app"],
+              "path": ["api", "register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"johndoe@example.com\", \"password\": \"password123\"}"
+            },
+            "url": {
+              "raw": "http://your-laravel-app/api/login",
+              "protocol": "http",
+              "host": ["your-laravel-app"],
+              "path": ["api", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer your_api_token_here"
+              }
+            ],
+            "url": {
+              "raw": "http://your-laravel-app/api/user",
+              "protocol": "http",
+              "host": ["your-laravel-app"],
+              "path": ["api", "user"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer your_api_token_here"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"Johnathan Doe\", \"email\": \"johnathan@example.com\"}"
+            },
+            "url": {
+              "raw": "http://your-laravel-app/api/user",
+              "protocol": "http",
+              "host": ["your-laravel-app"],
+              "path": ["api", "user"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Consultation Endpoints",
+      "item": [
+        {
+          "name": "Create Consultation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer your_api_token_here"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\": \"Consultation with Dr. Smith\", \"description\": \"Discussing new treatment plans\", \"scheduled_at\": \"2025-05-12T10:00:00\"}"
+            },
+            "url": {
+              "raw": "http://your-laravel-app/api/consultations",
+              "protocol": "http",
+              "host": ["your-laravel-app"],
+              "path": ["api", "consultations"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Consultations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer your_api_token_here"
+              }
+            ],
+            "url": {
+              "raw": "http://your-laravel-app/api/consultations",
+              "protocol": "http",
+              "host": ["your-laravel-app"],
+              "path": ["api", "consultations"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Specific Consultation",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer your_api_token_here"
+              }
+            ],
+            "url": {
+              "raw": "http://your-laravel-app/api/consultations/{{consultation_id}}",
+              "protocol": "http",
+              "host": ["your-laravel-app"],
+              "path": ["api", "consultations", "{{consultation_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Consultation",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer your_api_token_here"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\": \"Consultation with Dr. Smith - Updated\", \"description\": \"Discussing updated treatment plans\", \"scheduled_at\": \"2025-05-14T14:00:00\"}"
+            },
+            "url": {
+              "raw": "http://your-laravel-app/api/consultations/{{consultation_id}}",
+              "protocol": "http",
+              "host": ["your-laravel-app"],
+              "path": ["api", "consultations", "{{consultation_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Consultation",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer your_api_token_here"
+              }
+            ],
+            "url": {
+              "raw": "http://your-laravel-app/api/consultations/{{consultation_id}}",
+              "protocol": "http",
+              "host": ["your-laravel-app"],
+              "path": ["api", "consultations", "{{consultation_id}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
