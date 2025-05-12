@@ -1,28 +1,9 @@
 services:
   - type: web
-    name: laravel-vue-app
-    env: docker
-    dockerfilePath: ./Dockerfile
-    startCommand: |
-      php artisan config:clear && \
-      php artisan migrate --force && \
-      php artisan passport:keys --force && \
-      php artisan config:cache && \
-      php artisan serve --host=0.0.0.0 --port=8000
+    name: my-laravel-app
+    env: php
+    buildCommand: "composer install --no-dev --optimize-autoloader"
+    startCommand: "php -S 0.0.0.0:10000 -t public/"
     envVars:
-      - key: APP_ENV
-        value: production
       - key: APP_KEY
-        generateValue: true
-      - key: DB_CONNECTION
-        value: mysql
-      - key: DB_HOST
-        value: your-db-host
-      - key: DB_PORT
-        value: 3306
-      - key: DB_DATABASE
-        value: laravel
-      - key: DB_USERNAME
-        value: root
-      - key: 123
-        value: your-password
+        value: your-app-key
